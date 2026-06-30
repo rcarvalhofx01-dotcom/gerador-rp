@@ -1,55 +1,86 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: Arial, Helvetica, sans-serif;
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,Helvetica,sans-serif;
 }
 
-body {
-    background: #0f172a;
-    color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    padding: 20px;
+body{
+    background:#0f172a;
+    color:white;
+    padding:25px;
 }
 
-.container {
-    width: 100%;
-    max-width: 420px;
-    background: #1e293b;
-    border-radius: 20px;
-    padding: 30px;
-    box-shadow: 0 0 25px rgba(0,0,0,.35);
+.container{
+    max-width:700px;
+    margin:auto;
 }
 
-h1 {
-    text-align: center;
-    margin-bottom: 10px;
+h1{
+    text-align:center;
+    margin-bottom:8px;
+    font-size:32px;
 }
 
-p {
-    text-align: center;
-    color: #cbd5e1;
-    margin-bottom: 30px;
+.subtitulo{
+    text-align:center;
+    color:#94a3b8;
+    margin-bottom:30px;
 }
 
-.botao {
-    display: block;
-    text-decoration: none;
-    text-align: center;
-    background: #2563eb;
-    color: white;
-    padding: 15px;
-    border-radius: 12px;
-    margin-bottom: 15px;
-    font-size: 18px;
-    font-weight: bold;
-    transition: .2s;
+.card{
+    background:#1e293b;
+    border-radius:18px;
+    padding:18px;
+    margin-bottom:20px;
+    box-shadow:0 5px 20px rgba(0,0,0,.25);
 }
 
-.botao:hover {
-    background: #1d4ed8;
-    transform: scale(1.02);
+.card h2{
+    margin-bottom:15px;
+    font-size:20px;
+}
+
+label{
+    display:block;
+    margin:12px 0 6px;
+    color:#cbd5e1;
+}
+
+input,textarea{
+    width:100%;
+    background:#334155;
+    border:none;
+    border-radius:12px;
+    padding:14px;
+    color:white;
+    font-size:15px;
+}
+
+textarea{
+    resize:vertical;
+}
+
+button{
+    width:100%;
+    margin-top:15px;
+    border:none;
+    border-radius:12px;
+    padding:15px;
+    background:#2563eb;
+    color:white;
+    font-size:17px;
+    font-weight:bold;
+}
+
+button:active{
+    transform:scale(.98);
+}
+
+.botao-voltar{
+    display:block;
+    text-align:center;
+    margin-top:20px;
+    color:white;
+    text-decoration:none;
 }
