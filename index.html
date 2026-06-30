@@ -1,1 +1,49 @@
-<!-- Arquivo inicial -->
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerador RP Militar</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+
+    <h1>🪖 Gerador RP Militar</h1>
+    <p>Relatório de Promoção</p>
+
+    <label>Instrutor</label>
+    <input type="text" id="instrutor" placeholder="@SeuNome">
+
+    <label>Auxiliares</label>
+    <input type="text" id="auxiliares" placeholder="Opcional">
+
+    <label>Aprovados</label>
+    <textarea id="aprovados" rows="6" placeholder="Um por linha"></textarea>
+
+    <label>Reprovados</label>
+    <textarea id="reprovados" rows="4" placeholder="Um por linha"></textarea>
+
+    <label>Observações</label>
+    <textarea id="observacoes" rows="3" placeholder="N/A"></textarea>
+
+    <button onclick="gerarRelatorio()">
+        Gerar Relatório
+    </button>
+
+    <button onclick="copiarRelatorio()">
+        Copiar Relatório
+    </button>
+
+    <h2>Resultado</h2>
+
+    <textarea id="resultado" rows="20" readonly></textarea>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
