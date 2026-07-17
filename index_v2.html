@@ -1,0 +1,93 @@
+<!DOCTYPE html><html lang="pt-BR"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CGEx Relatórios v2</title>
+<style>
+body{margin:0;font-family:Arial;background:#1f2125;color:#fff}
+header{padding:14px;background:#111;text-align:center}
+main{max-width:700px;margin:auto;padding:12px}
+select,input,textarea,button{width:100%;padding:12px;margin:6px 0;border-radius:8px;border:1px solid #444;background:#2b2d31;color:#fff;box-sizing:border-box}
+button{background:#5865F2;border:0}
+pre{white-space:pre-wrap;background:#111;padding:12px;border-radius:8px}
+</style></head><body><header><h2>CGEx Relatórios</h2></header><main>
+<select id=t onchange="render()">
+<option value=adv>Advertência</option>
+<option value=reb>Rebaixamento</option>
+<option value=pt>Patente de Treino</option>
+</select>
+<div id=f></div>
+<button onclick="gerar()">Gerar</button>
+<button onclick="navigator.clipboard.writeText(out.textContent)">Copiar</button>
+<pre id=out></pre>
+</main><script>
+const RESP="<@1482042970973933711>";
+function render(){
+let s=t.value,h="";
+if(s=="adv")h=`Função<input id=func value="Corregedoria">
+Indivíduo<input id=ind>
+Nick Roblox<input id=nick>
+ID<input id=id>
+Motivo<input id=mot>
+Observações<textarea id=obs></textarea>
+Comprovações<textarea id=comp></textarea>`;
+if(s=="reb")h=`Função<input id=func value="Corregedoria">
+Indivíduo<input id=ind>
+Nick Roblox<input id=nick>
+ID<input id=id>
+Motivo<input id=mot>
+Antiga Função<input id=ant>
+Nova Função<input id=nova>
+Observações<textarea id=obs></textarea>
+Comprovações<textarea id=comp></textarea>`;
+if(s=="pt")h=`Nick do instrutor<input id=ins>
+Nick do militar aprovado<input id=apr>
+Patente a entregar<input id=pat>
+Comprovações/Justificativa<textarea id=jus></textarea>`;
+f.innerHTML=h;
+}
+function v(i){let e=document.getElementById(i);return e?e.value:""}
+function gerar(){
+let d=new Date().toLocaleDateString("pt-BR"),txt="";
+if(t.value=="adv")txt=`**《 ADVERTÊNCIA 》**
+• | Responsável: ${RESP}
+• | Função: ${v("func")}
+♤ ——————————————— ♤
+• | Indivíduo: ${v("ind")}
+• | Nick do Roblox: ${v("nick")}
+• | ID: ${v("id")}
+
+• | Motivo(s): ${v("mot")}
+• | Observações: ${v("obs")}
+♤ ——————————————— ♤
+• | Data/Hora: ${d}
+• | Comprovações: ${v("comp")}`;
+if(t.value=="reb")txt=`**《 REBAIXAMENTO 》**
+• | Responsável: ${RESP}
+• | Função: ${v("func")}
+♤——————————————— ♤
+• | Indivíduo: ${v("ind")}
+• | Nick do Roblox: ${v("nick")}
+• | ID: ${v("id")}
+
+• | Motivo(s): ${v("mot")}
+• | Antiga Função: ${v("ant")}
+• | Nova Função: ${v("nova")}
+
+• | Observações: ${v("obs")}
+♤ ——————————————— ♤
+• | Data/Hora: ${d}
+• | Comprovações: ${v("comp")}`;
+if(t.value=="pt")txt=`**<:cargo:1477086396706586745> RELATÓRIO - PATENTE DE TREINO - CGEX <:cargo:1477086396706586745>**
+
+👤 Responsável: ${RESP}
+
+🧾・Nick do instrutor: ${v("ins")}
+
+🧾・Nick do militar aprovado: ${v("apr")}
+
+🧾・Patente a entregar: ${v("pat")}
+
+📎・Comprovações/Justificativa: ${v("jus")}`;
+out.textContent=txt;
+}
+render();
+</script></body></html>
