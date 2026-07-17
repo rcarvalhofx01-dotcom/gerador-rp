@@ -1,0 +1,102 @@
+
+<!DOCTYPE html><html lang="pt-BR"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CGEx Relatórios</title>
+<style>
+body{margin:0;font-family:Arial;background:#1f2125;color:#fff;display:flex}
+nav{width:240px;background:#111;padding:10px;height:100vh;overflow:auto}
+main{flex:1;padding:16px}
+button{display:block;width:100%;margin:6px 0;padding:10px;background:#5865F2;color:#fff;border:0;border-radius:6px}
+input,textarea{width:100%;padding:8px;margin:6px 0 12px;background:#2b2d31;color:#fff;border:1px solid #444;border-radius:5px}
+#out{white-space:pre-wrap;background:#111;padding:10px}
+.act{display:flex;gap:8px}.act button{width:auto}
+</style></head><body>
+<nav>
+<h3>CGEx</h3>
+<button onclick="sel('advertencia')">Advertência</button>
+<button onclick="sel('rebaixamento')">Rebaixamento</button>
+<button onclick="sel('patenteTreino')">Patente Treino</button>
+<button onclick="sel('entregaPatente')">Entrega Patente</button>
+<button onclick="sel('revogacao')">Revogação</button>
+<button onclick="sel('exilio')">Exílio</button>
+</nav>
+<main><h2 id=t></h2><div id=f></div>
+<div class=act><button onclick="gerar()">Gerar</button><button onclick="copiar()">Copiar</button></div>
+<h3>Resultado</h3><div id=out></div></main>
+<script>
+let tipo="";
+function campos(a){return a.map(x=>x[1]=="ta"?`<label>${x[0]}</label><textarea id="${x[2]}"></textarea>`:`<label>${x[0]}</label><input id="${x[2]}" value="${x[3]||""}">`).join("")}
+function sel(tp){
+tipo=tp;
+let h="";
+if(tp=="advertencia"){t.textContent="Advertência";h=campos([["Responsável","","r"],["Função","","func","Corregedoria"],["Indivíduo","","ind"],["Nick Roblox","","nick"],["ID","","id"],["Motivo","","mot"],["Observações","ta","obs"],["Comprovações","ta","comp"]]);}
+if(tp=="rebaixamento"){t.textContent="Rebaixamento";h=campos([["Responsável","","r"],["Função","","func","Corregedoria"],["Indivíduo","","ind"],["Nick Roblox","","nick"],["ID","","id"],["Motivo","","mot"],["Antiga Função","","ant"],["Nova Função","","nova"],["Observações","ta","obs"],["Comprovações","ta","comp"]]);}
+if(tp=="patenteTreino"){t.textContent="Patente de Treino";h=campos([["Responsável","","r"],["Nick Instrutor","","ins"],["Nick Militar Aprovado","","apr"],["Patente","","pat"],["Justificativa","ta","jus"]]);}
+if(tp=="entregaPatente"){t.textContent="Entrega de Patente";h=campos([["Responsável","","r"],["Nick Militar","","nick"],["Patente","","pat"],["Justificativa","ta","jus"]]);}
+if(tp=="revogacao"){t.textContent="Revogação";h=campos([["Atendente","","r"],["Nick","","nick"],["Patente Perdida","","pat"],["Justificativa","ta","jus"]]);}
+if(tp=="exilio"){t.textContent="Exílio";h=campos([["Responsável","","r"],["Função","","func","Corregedoria"],["Solicitante","","sol"],["Nick Roblox","","nick"],["Nick Discord","","disc"],["ID Discord","","idd"],["Motivo","ta","mot"],["Comprovações","ta","comp"]]);}
+f.innerHTML=h;
+}
+function v(id){let e=document.getElementById(id);return e?e.value:""}
+function gerar(){let d=new Date().toLocaleString('pt-BR'),txt="";
+switch(tipo){
+case"advertencia":txt=`**《 ADVERTÊNCIA 》**
+• | Responsável: ${v("r")}
+• | Função: ${v("func")}
+♤———————————————♤
+• | Indivíduo: ${v("ind")}
+• | Nick do Roblox: ${v("nick")}
+• | ID: ${v("id")}
+
+• | Motivo(s): ${v("mot")}
+• | Observações: ${v("obs")}
+♤———————————————♤
+• | Data/Hora: ${d}
+• | Comprovações: ${v("comp")}`;break;
+case"rebaixamento":txt=`**《 REBAIXAMENTO 》**
+• | Responsável: ${v("r")}
+• | Função: ${v("func")}
+• | Indivíduo: ${v("ind")}
+• | Nick do Roblox: ${v("nick")}
+• | ID: ${v("id")}
+• | Motivo(s): ${v("mot")}
+• | Antiga Função: ${v("ant")}
+• | Nova Função: ${v("nova")}
+• | Observações: ${v("obs")}
+• | Data/Hora: ${d}
+• | Comprovações: ${v("comp")}`;break;
+case"patenteTreino":txt=`**RELATÓRIO - PATENTE DE TREINO - CGEX**
+
+👤 Responsável: ${v("r")}
+
+🧾 Nick do instrutor: ${v("ins")}
+🧾 Nick do militar aprovado: ${v("apr")}
+🧾 Patente a entregar: ${v("pat")}
+
+📎 Comprovações/Justificativa: ${v("jus")}`;break;
+case"entregaPatente":txt=`**RELATÓRIO DE ENTREGA DE PATENTE - CGEX**
+
+👤 Responsável: ${v("r")}
+🧾 Nick do Militar: ${v("nick")}
+🧾 Patente: ${v("pat")}
+📎 Justificativa: ${v("jus")}`;break;
+case"revogacao":txt=`**SOLICITAÇÃO DE REVOGAÇÃO**
+👤 Atendente: ${v("r")}
+🧾 Nick: ${v("nick")}
+🧾 Patente perdida: ${v("pat")}
+📎 Justificativa: ${v("jus")}`;break;
+case"exilio":txt=`**SOLICITAÇÃO DE EXÍLIO**
+• Responsável: ${v("r")}
+• Função: ${v("func")}
+• Solicitante: ${v("sol")}
+• Nick Roblox: ${v("nick")}
+• Nick Discord: ${v("disc")}
+• ID Discord: ${v("idd")}
+• Motivo: ${v("mot")}
+• Data/Hora: ${d}
+• Comprovações: ${v("comp")}`;break;
+}
+out.textContent=txt}
+function copiar(){navigator.clipboard.writeText(out.textContent);alert("Copiado.");}
+sel("advertencia");
+</script></body></html>
